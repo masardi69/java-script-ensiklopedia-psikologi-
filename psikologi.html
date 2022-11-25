@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ensiklopedia psikologi</title>
+    <link rel="stylesheet" href="myStyle.css" />
+  </head>
+  <body>
+    <h1>Kamus Ensiklopedia psikologi</h1>
+    <p id="p"></p>
+    <form action="">
+      <div>
+        <label for="from">masukkan istilah</label>
+        <textarea id="from" name="from" tabindex="1" autofocus></textarea>
+      </div>
+      <div>
+        <input type="submit" value="cari" name="cari" id="cari" tabindex="2" />
+        <input type="button" value="Clear" onclick="javascript:eraseText();" tabindex="3">
+      <div>
+        <label for="to">arti istilah</label>
+        <textarea id="to" name="to" tabindex="4" readonly></textarea>
+      </div>
+      <div><button type="button" onclick="copy_text()">Copy text</button></div>
+      <div><button type='button' onclick="tts()">TextToSpeech</button></div>
+      <div>
+        <input type="checkbox" name="realtime" id="realtime" />
+        <label for="realtime">Realtime translate</label>
+      </div>
+    </form>
+    <script src="psikologi.js"></script>
+    <!--PopUp text copied to clipboard-->   
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> 
+ <script>
+        //fungsi copy text
+function copy_text() {
+  document.getElementById("to").select();
+  document.execCommand("copy");
+  //alert("Teks Berhasil Disalin Ke Clipboard.");
+                 Swal.fire({         //displays a pop up with sweetalert
+                    icon: 'success',
+                    title: 'Text copied to clipboard',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+  
+              }
+</script>
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=zsNm3tuu"></script>
+<script>
+ let speak = 1;
+
+ function tts(){
+
+  if (speak) {
+    speak = 0;
+    responsiveVoice.speak(String(document.getElementById("to").value),'Indonesian Female',{
+     pitch: 1, 
+     rate: 1.1, 
+     volume: 1
+    } );
+  } else {
+    speak = 1;
+    responsiveVoice.cancel();
+  }
+
+ }
+
+</script>
+
+  </body>
+</html>
